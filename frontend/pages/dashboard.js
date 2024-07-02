@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
+import Header from '../components/Header';
 
 const Dashboard = () => {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
@@ -127,12 +128,7 @@ const Dashboard = () => {
     <div className="flex">
       <Sidebar isVisible={isSidebarVisible} toggleSidebar={() => setSidebarVisible(!isSidebarVisible)} />
       <div className="flex-grow container mx-auto ml-72 mr-8">
-        <header className="flex justify-between items-center py-4">
-          <h1 className="text-2xl font-bold">ダッシュボード</h1>
-          <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded">
-            ログアウト
-          </button>
-        </header>
+        <Header username={username} onLogout={handleLogout} />
         <main>
           <h2 className="text-lg mb-4">ようこそ、<span className="font-bold">{username}</span>さん</h2>
           <div className="flex justify-between items-center py-4">
