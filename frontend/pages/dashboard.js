@@ -90,6 +90,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    console.log("useEffect実行");
     const fetchUserData = async () => {
       const user = await fetchData('/user/');
       setUsername(user.username);
