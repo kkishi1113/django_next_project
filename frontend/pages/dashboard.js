@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import Todo from '../components/Todo';
 import { fetchData, postData, deleteData, patchData } from '../utils/utils';
 
+const apps = [
+  { name: 'Todo', content: <Todo /> },
+]
+
 const Dashboard = () => {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const [username, setUsername] = useState('');
+  const [mainContent, setMainContent] = useState(apps[0]);
   const router = useRouter();
 
   // 共通のエラーハンドリング関数
@@ -20,6 +24,10 @@ const Dashboard = () => {
     } else {
         console.error('エラーが発生しました:', error);
     }
+  };
+
+  const handleSelectApp = (app) => {
+    setMainContent(app);
   };
 
   useEffect(() => {
@@ -35,25 +43,15 @@ const Dashboard = () => {
     fetchUserData();
   }, []);
 
-  const handleLogout = async () => {
-    try{
-      await postData('/logout/', {});
-      localStorage.removeItem('token');
-      router.push('/');
-    } catch (error){
-      handleError(error);
-    }
-    
-  };
-
   return (
     <div className="flex">
       <Sidebar isVisible={isSidebarVisible} toggleSidebar={() => setSidebarVisible(!isSidebarVisible)} />
       <div className="flex-grow container mx-auto ml-72 mr-8">
-        <Header username={username} onLogout={handleLogout} />
+        <Header username={username} postData={postData} />
         <main>
           <h2 className="text-lg mb-4">ようこそ、<span className="font-bold">{username}</span>さん</h2>
-          <Todo fetchData={fetchData} postData={postData} patchData={patchData} deleteData={deleteData} />
+          {mainContent.content}
+          {/* <Todo fetchData={fetchData} postData={postData} patchData={patchData} deleteData={deleteData} /> */}
         </main>
       </div>
     </div>

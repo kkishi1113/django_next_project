@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { fetchData, postData, deleteData, patchData } from '../utils/utils';
 
-const Todo = ({ fetchData, postData, patchData, deleteData }) => {
+
+const Todo = () => {
     const [todos, setTodos] = useState([]);
     const [newTodoTitle, setNewTodoTitle] = useState('');
     const router = useRouter();
