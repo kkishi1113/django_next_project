@@ -1,30 +1,59 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const Todo = ({ fetchData, postData, patchData, deleteData }) => {
     const [todos, setTodos] = useState([]);
     const [newTodoTitle, setNewTodoTitle] = useState('');
+    const router = useRouter();
+
+    // 共通のエラーハンドリング関数
+    const handleError = (error) => {
+        if (error.response && error.response.status === 401) {
+            alert('セッションの有効期限が切れました。再度ログインしてください。');
+            localStorage.removeItem('token');
+            router.push('/');
+        } else {
+            console.error('エラーが発生しました:', error);
+        }
+    };
     
     const handleDeleteTodo = async (id) => {
-        await deleteData(`/todos/${id}/`);
-        setTodos(todos.filter((todo) => todo.id !== id));
+        try{
+            await deleteData(`/todos/${id}/`);
+            setTodos(todos.filter((todo) => todo.id !== id));
+        } catch (error){
+            handleError(error);
+        }
     };
 
     const handleUpdateTodo = async (id, title, text) => {
-        await patchData(`/todos/${id}/`, { title, text });
+        try{
+            await patchData(`/todos/${id}/`, { title, text });
+        } catch(error){
+            handleError(error);
+        }
     };
 
     const handleAddTodo = async () => {
-        if (!newTodoTitle) return;
-        const newTodo = await postData('/todos/', { title: newTodoTitle, text: '' });
-        setTodos([...todos, newTodo]);
-        setNewTodoTitle('');
-      };
+        try{
+            if (!newTodoTitle) return;
+            const newTodo = await postData('/todos/', { title: newTodoTitle, text: '' });
+            setTodos([...todos, newTodo]);
+            setNewTodoTitle('');
+        }catch(error){
+            handleError(error);
+        }
+    };
 
     useEffect(() => {
-        console.log("useEffect実行");
+        console.log("useEffect実行Todo");
         const fetchTodoList = async () => {
-            const todos = await fetchData('/todos/');
-            setTodos(todos);
+            try{
+                const todos = await fetchData('/todos/');
+                setTodos(todos);
+            } catch(error) {
+                handleError(error);
+            }
         };
         fetchTodoList();
     }, []);

@@ -4,104 +4,46 @@ import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import Todo from '../components/Todo';
+import { fetchData, postData, deleteData, patchData } from '../utils/utils';
 
 const Dashboard = () => {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const [username, setUsername] = useState('');
   const router = useRouter();
 
-  // 共通のAPIクライアントの作成
-  const apiClient = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-  });
-
   // 共通のエラーハンドリング関数
   const handleError = (error) => {
     if (error.response && error.response.status === 401) {
-      alert('セッションの有効期限が切れました。再度ログインしてください。');
-      localStorage.removeItem('token');
-      router.push('/');
+        alert('セッションの有効期限が切れました。再度ログインしてください。');
+        localStorage.removeItem('token');
+        router.push('/');
     } else {
-      console.error('エラーが発生しました:', error);
-    }
-  };
-
-  // 共通のAPI呼び出し関数
-  const fetchData = async (url, options = {}) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await apiClient.get(url, {
-        ...options,
-        headers: {
-          Authorization: `Token ${token}`,
-          ...options.headers,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      handleError(error);
-    }
-  };
-
-  const postData = async (url, data, options = {}) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await apiClient.post(url, data, {
-        ...options,
-        headers: {
-          Authorization: `Token ${token}`,
-          ...options.headers,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      handleError(error);
-    }
-  };
-
-  const deleteData = async (url, options = {}) => {
-    try {
-      const token = localStorage.getItem('token');
-      await apiClient.delete(url, {
-        ...options,
-        headers: {
-          Authorization: `Token ${token}`,
-          ...options.headers,
-        },
-      });
-    } catch (error) {
-      handleError(error);
-    }
-  };
-
-  const patchData = async (url, data, options = {}) => {
-    try {
-      const token = localStorage.getItem('token');
-      await apiClient.patch(url, data, {
-        ...options,
-        headers: {
-          Authorization: `Token ${token}`,
-          ...options.headers,
-        },
-      });
-    } catch (error) {
-      handleError(error);
+        console.error('エラーが発生しました:', error);
     }
   };
 
   useEffect(() => {
-    console.log("useEffect実行");
+    console.log("useEffect実行Dashboard");
     const fetchUserData = async () => {
-      const user = await fetchData('/user/');
-      setUsername(user.username);
+      try{
+        const user = await fetchData('/user/');
+        setUsername(user.username);
+      } catch(error) {
+        handleError(error);
+      }
     };
     fetchUserData();
   }, []);
 
   const handleLogout = async () => {
-    await postData('/logout/', {});
-    localStorage.removeItem('token');
-    router.push('/');
+    try{
+      await postData('/logout/', {});
+      localStorage.removeItem('token');
+      router.push('/');
+    } catch (error){
+      handleError(error);
+    }
+    
   };
 
   return (
