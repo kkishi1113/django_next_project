@@ -223,3 +223,4 @@ loggingブランチ作成&コミットプッシュ2
 git ユーザ名　変更
 git config email, usernameを変更
 windows用のブランチ作成
+dashboardブランチ作成
