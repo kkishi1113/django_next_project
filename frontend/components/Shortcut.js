@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { fetchData, postData, deleteData, patchData } from '../utils/utils';
@@ -15,11 +17,52 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+
+import * as React from "react"
+ 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
+
+
+const formSchema = z.object({
+  shortcutTitle: z.string().min(1,{message: "入力が必須です。"}).max(100,{message: "最大文字数は100文字です。"}),
+  url: z.string().min(1,{message: "入力が必須です。"}).max(100,{message: "最大文字数は100文字です。"}).url({message: "URLの形式で入力してください。"}),
+});
+
 const Shortcut = () => {
+    const form = useForm({
+      resolver: zodResolver(formSchema),
+      defaultValues: {
+        shortcutTitle: "Google",
+        url: "https://www.google.com/",
+      },
+      mode: "onChange",
+    });
     const [shortcuts, setShortcuts] = useState([]);
-    const [shortcutTitle, setShortcutTitle] = useState('');
-    const [url, setUrl] = useState('');
+    // const [shortcutTitle, setShortcutTitle] = useState();
+    // const [url, setUrl] = useState();
     const router = useRouter();
+
+    
 
     // 共通のエラーハンドリング関数
     const handleError = (error) => {
@@ -49,11 +92,11 @@ const Shortcut = () => {
         }
     };
 
-    const handleAddShortcut = async () => {
+    const handleAddShortcut = async (values) => {
         try{
-            if (!shortcutTitle) return;
+            if (!values) return;
 
-            const newShortcut = await postData('/shortcuts/', { title: shortcutTitle, url: url });
+            const newShortcut = await postData('/shortcuts/', { title: values.shortcutTitle, url: values.url });
             setShortcuts([...shortcuts, newShortcut]);
         }catch(error){
             handleError(error);
@@ -80,43 +123,50 @@ const Shortcut = () => {
               <Button variant="outline">ショートカットを追加</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>ショートカットを追加</DialogTitle>
-                <DialogDescription>
-                  Make changes to your profile here. Click save when you're done.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="shortcutTitle" className="text-right">
-                    表示名
-                  </Label>
-                  <Input
-                    id="shortcutTitle"
-                    defaultValue="Google"
-                    className="col-span-3"
-                    onChange={(e) => setShortcutTitle(e.target.value)}
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(handleAddShortcut)} className="space-y-8">
+                  <DialogHeader>
+                    <DialogTitle>ショートカットを追加</DialogTitle>
+                    <DialogDescription></DialogDescription>
+                  </DialogHeader>
+                  <FormField
+                    control={form.control}
+                    name="shortcutTitle"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>表示名</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Google" {...field} />
+                        </FormControl>
+                        <FormDescription></FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="url" className="text-right">
-                    URL
-                  </Label>
-                  <Input
-                    id="url"
-                    defaultValue="https://wwww.google.com/"
-                    className="col-span-3"
-                    onChange={(e) => setUrl(e.target.value)}
+                  <FormField
+                    control={form.control}
+                    name="url"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>URL</FormLabel>
+                        <FormControl>
+                          <Input placeholder="https://www.google.com/" {...field} />
+                        </FormControl>
+                        <FormDescription></FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-              </div>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button type="submit" onClick={handleAddShortcut}>追加</Button>
-                </DialogClose>
-              </DialogFooter>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button type="submit" disabled={!form.formState.isValid}>追加</Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </form>
+              </Form>
             </DialogContent>
           </Dialog>
+          
        </>
     );
 }
