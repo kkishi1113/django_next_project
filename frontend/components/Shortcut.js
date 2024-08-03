@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -17,6 +18,7 @@ import {
 const Shortcut = () => {
     const [shortcuts, setShortcuts] = useState([]);
     const [shortcutTitle, setShortcutTitle] = useState('');
+    const [url, setUrl] = useState('');
     const router = useRouter();
 
     // 共通のエラーハンドリング関数
@@ -39,9 +41,9 @@ const Shortcut = () => {
         }
     };
 
-    const handleUpdateShortcut = async (id, title, text) => {
+    const handleUpdateShortcut = async (id, title, url) => {
         try{
-            await patchData(`/shortcuts/${id}/`, { title, text });
+            await patchData(`/shortcuts/${id}/`, { title, url });
         } catch(error){
             handleError(error);
         }
@@ -50,26 +52,26 @@ const Shortcut = () => {
     const handleAddShortcut = async () => {
         try{
             if (!shortcutTitle) return;
-            const newShortcut = await postData('/shortcuts/', { title: shortcutTitle, text: '' });
+
+            const newShortcut = await postData('/shortcuts/', { title: shortcutTitle, url: url });
             setShortcuts([...shortcuts, newShortcut]);
-            setShortcutTitle('');
         }catch(error){
             handleError(error);
         }
     };
 
-    // useEffect(() => {
-    //     console.log("useEffect実行Shortcut");
-    //     const fetchShortcutList = async () => {
-    //         try{
-    //             const shortcuts = await fetchData('/shortcuts/');
-    //             setShortcuts(shortcuts);
-    //         } catch(error) {
-    //             handleError(error);
-    //         }
-    //     };
-    //     fetchShortcutList();
-    // }, []);
+    useEffect(() => {
+        console.log("useEffect実行Shortcut");
+        const fetchShortcutList = async () => {
+            try{
+                const shortcuts = await fetchData('/shortcuts/');
+                setShortcuts(shortcuts);
+            } catch(error) {
+                handleError(error);
+            }
+        };
+        fetchShortcutList();
+    }, []);
 
     return (
        <>
@@ -104,12 +106,14 @@ const Shortcut = () => {
                     id="url"
                     defaultValue="https://wwww.google.com/"
                     className="col-span-3"
-                    onChange={(e) => setShortcutTitle(e.target.value)}
+                    onChange={(e) => setUrl(e.target.value)}
                   />
                 </div>
               </div>
               <DialogFooter>
-                <Button type="submit" onClick={()=>handleAddShortcut()}>追加</Button>
+                <DialogClose asChild>
+                  <Button type="submit" onClick={handleAddShortcut}>追加</Button>
+                </DialogClose>
               </DialogFooter>
             </DialogContent>
           </Dialog>

@@ -2,6 +2,7 @@ from django.contrib import admin    #type: ignore
 from django.urls import path, include   #type: ignore
 # from notes.views import NoteListCreate
 from notes.views import TodoListCreateAPI, TodoUpdateDeleteAPI
+from shortcuts.views import ShortcutListCreateAPI, ShortcutUpdateDeleteAPI
 from knox import views as knox_views    #type: ignore
 from accounts.views import LoginView, RegisterView, UserDetailAPI
 
@@ -14,5 +15,7 @@ urlpatterns = [
     path('api/user/', UserDetailAPI.as_view(), name='user-detail'),
     path('api/todos/', TodoListCreateAPI.as_view(), name='todo-list-create'),
     path('api/todos/<int:pk>/', TodoUpdateDeleteAPI.as_view(), name='todo-update-delete'),
+    path('api/shortcuts/', ShortcutListCreateAPI.as_view(), name='shortcut-list-create'),
+    path('api/shortcuts/<int:pk>/', ShortcutUpdateDeleteAPI.as_view(), name='shortcut-update-delete'),
     # path('api/notes/', NoteListCreate.as_view(), name='note-list-create'),
 ]
