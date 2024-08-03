@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { fetchData, postData, deleteData, patchData } from '../utils/utils';
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
   Dialog,
@@ -40,6 +39,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import Link from 'next/link';
 
 
 
@@ -166,7 +166,114 @@ const Shortcut = () => {
               </Form>
             </DialogContent>
           </Dialog>
-          
+          <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-4 py-4">
+            <Link href="https://www.google.com/" className="block aspect-square lg:w-32 md:w-32 sm:w-96 relative z-10">
+              <Card className="h-full w-full relative">
+                <CardHeader className="flex items-center justify-center h-1/3 relative">
+                  <Button variant="ghost" className="aspect-square h-1/2 absolute top-0 right-0 z-20" asChild>
+                    <Link href="#">:</Link>
+                  </Button>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center h-1/3">
+                  <img src="https://www.google.com/favicon.ico" className="object-contain" />
+                </CardContent>
+                <CardFooter className="flex justify-center h-1/3">
+                  <p>Google</p>
+                </CardFooter>
+              </Card>
+            </Link>
+            <Link href="https://www.google.com/" className="block aspect-square lg:w-32 md:w-32 sm:w-96 relative z-10">
+              <Card className="h-full w-full relative">
+                <CardHeader className="flex items-center justify-center h-1/3 relative">
+                  <Button variant="ghost" className="aspect-square h-1/2 absolute top-0 right-0 z-20" asChild>
+                    <Link href="#">:</Link>
+                  </Button>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center h-1/3">
+                  <img src="https://www.google.com/favicon.ico" className="object-contain" />
+                </CardContent>
+                <CardFooter className="flex justify-center h-1/3">
+                  <p>Google</p>
+                </CardFooter>
+              </Card>
+            </Link>
+{/*             
+            <Link href="https://www.google.com/" className="block aspect-square lg:w-32 md:w-48 sm:w-96 relative z-10">
+              <Card className="h-full w-full relative">
+                <CardHeader className="flex items-center justify-center h-1/3 relative">
+                  <Button variant="ghost" className="aspect-square h-1/2 absolute top-0 right-0 z-20" asChild>
+                    <Link href="#">:</Link>
+                  </Button>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center h-1/3">
+                  <img src="https://www.google.com/favicon.ico" className="object-contain" />
+                </CardContent>
+                <CardFooter className="flex justify-center h-1/3">
+                  <p className="text-center">Google</p>
+                </CardFooter>
+              </Card>
+            </Link>
+            <Link href="https://www.google.com/" className="block aspect-square lg:w-32 md:w-48 sm:w-96 relative z-10">
+              <Card className="h-full w-full relative">
+                <CardHeader className="flex items-center justify-center h-1/3 relative">
+                  <Button variant="ghost" className="aspect-square h-1/2 absolute top-0 right-0 z-20" asChild>
+                    <Link href="#">:</Link>
+                  </Button>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center h-1/3">
+                  <img src="https://www.google.com/favicon.ico" className="object-contain" />
+                </CardContent>
+                <CardFooter className="flex justify-center h-1/3">
+                  <p className="text-center">Google</p>
+                </CardFooter>
+              </Card>
+            </Link>
+            <Link href="https://www.google.com/" className="block aspect-square lg:w-32 md:w-48 sm:w-96 relative z-10">
+              <Card className="h-full w-full relative">
+                <CardHeader className="flex items-center justify-center h-1/3 relative">
+                  <Button variant="ghost" className="aspect-square h-1/2 absolute top-0 right-0 z-20" asChild>
+                    <Link href="#">:</Link>
+                  </Button>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center h-1/3">
+                  <img src="https://www.google.com/favicon.ico" className="object-contain" />
+                </CardContent>
+                <CardFooter className="flex justify-center h-1/3">
+                  <p className="text-center">Google</p>
+                </CardFooter>
+              </Card>
+            </Link>
+            <Link href="https://www.google.com/" className="block aspect-square lg:w-32 md:w-48 sm:w-96 relative z-10">
+              <Card className="h-full w-full relative">
+                <CardHeader className="flex items-center justify-center h-1/3 relative">
+                  <Button variant="ghost" className="aspect-square h-1/2 absolute top-0 right-0 z-20" asChild>
+                    <Link href="#">:</Link>
+                  </Button>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center h-1/3">
+                  <img src="https://www.google.com/favicon.ico" className="object-contain" />
+                </CardContent>
+                <CardFooter className="flex justify-center h-1/3">
+                  <p className="text-center">Google</p>
+                </CardFooter>
+              </Card>
+            </Link>
+            <Link href="https://www.google.com/" className="block aspect-square lg:w-32 md:w-48 sm:w-96 relative z-10">
+              <Card className="h-full w-full relative">
+                <CardHeader className="flex items-center justify-center h-1/3 relative">
+                  <Button variant="ghost" className="aspect-square h-1/2 absolute top-0 right-0 z-20" asChild>
+                    <Link href="#">:</Link>
+                  </Button>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center h-1/3">
+                  <img src="https://www.google.com/favicon.ico" className="object-contain" />
+                </CardContent>
+                <CardFooter className="flex justify-center h-1/3">
+                  <p className="text-center">Google</p>
+                </CardFooter>
+              </Card>
+            </Link> */}
+          </div>
        </>
     );
 }
