@@ -17,9 +17,9 @@ import {
 const Sidebar = ({ apps, handleSelectApp }) => {
 
   const menuList = [
-    { name: 'Dashboard', content: <Link href="/dashboard"><span className="block py-2 px-4 text-sm hover:bg-gray-700">ダッシュボード</span></Link>},
-    { name: 'Profile', content: <Link href="/profile"><span className="block py-2 px-4 text-sm hover:bg-gray-700">プロフィール</span></Link>},
-    { name: 'Settings', content: <Link href="/settings"><span className="block py-2 px-4 text-sm hover:bg-gray-700">設定</span></Link>},
+    // { name: 'Dashboard', content: <Link href="/dashboard"><span className="block py-2 px-4 text-sm">ダッシュボード</span></Link>},
+    { name: 'Profile', content: <Link href="/profile"><span className="block py-2 px-4 text-sm">プロフィール</span></Link>},
+    { name: 'Settings', content: <Link href="/settings"><span className="block py-2 px-4 text-sm">設定</span></Link>},
     ...apps,
   ]
 
@@ -38,7 +38,7 @@ const Sidebar = ({ apps, handleSelectApp }) => {
             { menuList.map((menu, index) => (
               <li key={index} className="relative">
                 <SheetClose asChild>
-                  <Link href="#" onClick={()=>handleSelectApp(menu)} className="block py-2 px-4 text-sm hover:bg-gray-700" >
+                  <Link href="#" onClick={()=>handleSelectApp(menu)} className="block py-2 px-4 text-sm hover:bg-gray-300" >
                     {menu.name}
                   </Link>
                 </SheetClose>
