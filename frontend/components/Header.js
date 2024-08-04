@@ -1,7 +1,8 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import Sidebar from './Sidebar';
 
-const Header = ({ postData }) => {
+const Header = ({ postData, apps, handleSelectApp }) => {
     const router = useRouter();
 
     // 共通のエラーハンドリング関数
@@ -26,8 +27,11 @@ const Header = ({ postData }) => {
     };
 
     return (
-        <header className="flex justify-between items-center py-4">
-            <h1 className="text-2xl font-bold">ダッシュボード</h1>
+        <header className="flex justify-between items-center p-4">
+            <div className="flex items-center">
+                <Sidebar apps={apps} handleSelectApp={handleSelectApp} />
+                <h1 className="text-2xl font-bold">ダッシュボード</h1>
+            </div>
             <div className="flex items-center">
                 <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded">
                     ログアウト

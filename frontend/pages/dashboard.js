@@ -17,7 +17,6 @@ const apps = [
 ]
 
 const Dashboard = () => {
-  const [isSidebarVisible, setSidebarVisible] = useState(false);
   const [username, setUsername] = useState('');
   const [mainContent, setMainContent] = useState(apps[0]);
   const router = useRouter();
@@ -51,15 +50,9 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="flex">
-      <Sidebar 
-        isVisible={isSidebarVisible} 
-        toggleSidebar={() => setSidebarVisible(!isSidebarVisible)} 
-        apps={apps}
-        handleSelectApp={handleSelectApp}
-      />
-      <div className="flex-grow container mx-auto ml-72 mr-8">
-        <Header username={username} postData={postData} />
+    <div>
+      <Header username={username} postData={postData} apps={apps} handleSelectApp={handleSelectApp} />
+      <div className="container">
         <main>
           <h2 className="text-lg mb-4">ようこそ、<span className="font-bold">{username}</span>さん</h2>
           {mainContent.content}
