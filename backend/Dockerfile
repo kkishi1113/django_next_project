@@ -1,6 +1,9 @@
 # ベースイメージ
 FROM python:3.9
 
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
 # 作業ディレクトリを設定
 WORKDIR /usr/src/app/
 
