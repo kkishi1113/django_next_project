@@ -1,12 +1,11 @@
-from django.shortcuts import render      #type: ignore
-from rest_framework import generics, permissions       #type: ignore
-from rest_framework.authtoken.serializers import AuthTokenSerializer     #type: ignore
-from knox.views import LoginView as KnoxLoginView    #type: ignore
-from django.contrib.auth import login    #type: ignore
-from rest_framework.response import Response    #type: ignore
-from django.contrib.auth.models import User  #type: ignore
-from rest_framework.serializers import ModelSerializer  #type: ignore
-from rest_framework.views import APIView    #type: ignore
+from django.shortcuts import render       
+from rest_framework import generics, permissions
+from knox.views import LoginView as KnoxLoginView
+from django.contrib.auth import login
+from rest_framework.response import Response
+from django.contrib.auth.models import User
+from rest_framework.serializers import ModelSerializer
+from rest_framework.views import APIView
 from .serializers import CustomAuthTokenSerializer
 import logging
 

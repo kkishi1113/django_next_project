@@ -1,9 +1,9 @@
-from django.contrib import admin    #type: ignore
-from django.urls import path, include   #type: ignore
+from django.contrib import admin
+from django.urls import path, include
 # from notes.views import NoteListCreate
 from notes.views import TodoListCreateAPI, TodoUpdateDeleteAPI
 from shortcuts.views import ShortcutListCreateAPI, ShortcutUpdateDeleteAPI
-from knox import views as knox_views    #type: ignore
+from knox import views as knox_views
 from accounts.views import LoginView, RegisterView, UserDetailAPI
 
 urlpatterns = [

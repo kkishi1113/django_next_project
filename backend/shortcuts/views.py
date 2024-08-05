@@ -1,7 +1,7 @@
-from rest_framework import generics, permissions #type: ignore
-from django.shortcuts import render     #type: ignore
+from rest_framework import generics, permissions
+from django.shortcuts import render
 from .models import Shortcut
-from .serializer import ShortcutSerializer      #type: ignore
+from .serializer import ShortcutSerializer
 import logging
 
 logger = logging.getLogger(__name__)

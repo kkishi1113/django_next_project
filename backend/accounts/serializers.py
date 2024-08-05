@@ -1,6 +1,6 @@
-from django.contrib.auth import authenticate    #type: ignore
-from django.contrib.auth.models import User #type: ignore
-from rest_framework import serializers  #type: ignore
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+from rest_framework import serializers
 
 class CustomAuthTokenSerializer(serializers.Serializer):
     email = serializers.EmailField()
