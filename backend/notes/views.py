@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions #type: ignore
+from rest_framework import generics, permissions
 # from .models import Note
 # from .serializers import NoteSerializer
 from .models import Todo

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'knox',
     'accounts',
     'notes',
+    'shortcuts',
 ]
 
 REST_FRAMEWORK = {
@@ -156,7 +157,7 @@ LOGGING = {
     },
     'handlers': {                       # ハンドラ
         'console': {                    # コンソール出力用のハンドラ
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
@@ -184,6 +185,12 @@ LOGGING = {
             'filename': './logs/notes.log',
             'formatter': 'verbose'
         },
+        'shortcuts_file': {                   # ファイル出力用のハンドラ
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': './logs/shortcuts.log',
+            'formatter': 'verbose'
+        },
     },
     'loggers': {                        # ロガー
         '': {                           # ルートロガー
@@ -206,33 +213,11 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True,
         },
-    },
-}
-
-##Geminiで生成したLOGGING
-"""
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '%(asctime)s %(levelname)s %(message)s',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': 'api_logs.log',
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['file'],
+        'shortcuts': {                   # shortcutsロガー
+            'handlers': ['shortcuts_file'],
             'level': 'INFO',
             'propagate': True,
         },
     },
 }
-"""
+

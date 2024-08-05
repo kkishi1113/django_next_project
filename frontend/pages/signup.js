@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-// Next.jsのLinkコンポーネントをインポート
 import Link from 'next/link';
 
 export default function Signup() {
