@@ -57,7 +57,7 @@ const Dashboard = () => {
         </main>
       </div>
       <div className="min-h-dvh">
-        <footer className="sticky top-full bg-slate-200">footer</footer>
+        <footer className="sticky top-full bg-slate-200 h-16"></footer>
       </div>
     </div>
   );
