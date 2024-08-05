@@ -35,7 +35,7 @@ const Sidebar = ({ apps, handleSelectApp }) => {
         </SheetTrigger>
         <SheetContent side="left">
           <SheetHeader>
-            <SheetTitle>サイドメニュー</SheetTitle>
+            <SheetTitle>Menu</SheetTitle>
             <SheetDescription></SheetDescription>
           </SheetHeader>
           <ul className="relative">

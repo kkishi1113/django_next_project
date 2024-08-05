@@ -171,7 +171,7 @@ const Shortcut = () => {
           </Dialog>
           <div className="grid grid-cols-2 xl:grid-cols-8 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 gap-4 py-4">
             {shortcuts.map((shortcut)=>(
-              <Card key={shortcut.id} className="h-full w-full relative">
+              <Card key={shortcut.id} className="h-full w-full relative hover:opacity-50">
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button variant="ghost" className="aspect-square absolute top-0 right-0 z-20" onClick={() => handleEditClick(shortcut)}>
@@ -224,14 +224,14 @@ const Shortcut = () => {
                     </Form>
                   </DialogContent>
                 </Dialog>
-                <Link href={shortcut.url} target="_blank" rel="noopener noreferrer" className="block aspect-square relative _blank">
-                  <CardContent className="absolute inset-0 flex items-center justify-center">
+                <Link href={shortcut.url} target="_blank" rel="noopener noreferrer" className="block aspect-square">
+                  <CardContent className="absolute inset-0 flex place-items-center ">
                     {/* <img src={shortcut.url+"/favicon.ico"} className="object-contain w-10" /> */}
                     {/* <img src={"http://www.google.com/s2/favicons?domain="+shortcut.url}  className="object-contain w-10" /> */}
-                    <img src={"https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url="+shortcut.url+"&size=128"}  className="object-contain w-10" />
+                    <img src={"https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url="+shortcut.url+"&size=128"}  className="m-auto w-12" />
                   </CardContent>
-                  <CardFooter className="absolute bottom-0 w-full flex justify-center h-1/3">
-                    <p>{shortcut.title}</p>
+                  <CardFooter className="absolute bottom-0 w-full flex justify-center h-1/3 px-1">
+                    <p className="text-center">{shortcut.title}</p>
                   </CardFooter>
                 </Link>
               </Card>

@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import Todo from '../components/Todo';
 import Shortcut from '../components/Shortcut';
-import Link from 'next/link';
 import { fetchData, postData, deleteData, patchData } from '../utils/utils';
 
 
@@ -57,6 +55,9 @@ const Dashboard = () => {
           <h2 className="text-lg mb-4">ようこそ、<span className="font-bold">{username}</span>さん</h2>
           {mainContent.content}
         </main>
+      </div>
+      <div className="min-h-dvh">
+        <footer className="sticky top-full bg-slate-200">footer</footer>
       </div>
     </div>
   );

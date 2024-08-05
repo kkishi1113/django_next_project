@@ -1,6 +1,9 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { Button } from '@/components/ui/button'
 import Sidebar from './Sidebar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 const Header = ({ postData, apps, handleSelectApp }) => {
     const router = useRouter();
@@ -27,15 +30,16 @@ const Header = ({ postData, apps, handleSelectApp }) => {
     };
 
     return (
-        <header className="flex justify-between items-center p-4">
+        <header className="flex justify-between items-center p-4  bg-slate-200">
             <div className="flex items-center">
                 <Sidebar apps={apps} handleSelectApp={handleSelectApp} />
-                <h1 className="text-2xl font-bold">ダッシュボード</h1>
+                <h1 className="text-2xl font-bold">Dashboard</h1>
             </div>
             <div className="flex items-center">
-                <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded">
-                    ログアウト
-                </button>
+                <Button variant="ghost" onClick={handleLogout} >
+                    <span className="block mx-1">Logout</span>
+                    <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                </Button>
             </div>
         </header>
     );
