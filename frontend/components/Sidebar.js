@@ -1,5 +1,7 @@
 "use client"
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import React from 'react';
 import Link from 'next/link';
 import { Button } from "@/components/ui/button"
@@ -27,7 +29,9 @@ const Sidebar = ({ apps, handleSelectApp }) => {
     <div className="grid grid-cols-2 gap-2">
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="outline">menu</Button>
+          <Button variant="outline">
+            <FontAwesomeIcon icon={faBars} />
+          </Button>
         </SheetTrigger>
         <SheetContent side="left">
           <SheetHeader>

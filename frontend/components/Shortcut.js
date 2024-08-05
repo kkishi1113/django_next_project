@@ -1,5 +1,7 @@
 "use client"
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { fetchData, postData, deleteData, patchData } from '../utils/utils';
@@ -172,7 +174,9 @@ const Shortcut = () => {
               <Card key={shortcut.id} className="h-full w-full relative">
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="ghost" className="aspect-square absolute top-0 right-0 z-20" onClick={() => handleEditClick(shortcut)}>:</Button>
+                    <Button variant="ghost" className="aspect-square absolute top-0 right-0 z-20" onClick={() => handleEditClick(shortcut)}>
+                      <FontAwesomeIcon icon={faEllipsisVertical} />
+                    </Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[425px]">
                     <Form {...form}>
