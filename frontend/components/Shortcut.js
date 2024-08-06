@@ -171,11 +171,11 @@ const Shortcut = () => {
         </Dialog>
         <div className="grid grid-cols-2 xl:grid-cols-8 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 gap-4 py-4">
           {shortcuts.map((shortcut)=>(
-            <Card key={shortcut.id} className="h-full w-full relative hover:opacity-50">
+            <Card key={shortcut.id} className="border-white shadow-white h-full w-full relative hover:opacity-50 group">
               <Dialog>
-                <DialogTrigger asChild>
-                  <Button variant="ghost" className="aspect-square absolute top-0 right-0 z-20" onClick={() => handleEditClick(shortcut)}>
-                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                <DialogTrigger asChild className="rounded-full">
+                  <Button variant="ghost" className="aspect-square absolute top-0 right-0 z-20 hidden group-hover:block" onClick={() => handleEditClick(shortcut)}>
+                    <FontAwesomeIcon icon={faEllipsisVertical} className="" />
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
