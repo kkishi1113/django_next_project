@@ -29,7 +29,6 @@ import {
 } from "@/components/ui/card"
 
 const formSchema = z.object({
-  // username: z.string(),
   email: z.string()
     .email("正しいメールアドレスを入力してください。"),
   password: z.string()
@@ -64,7 +63,6 @@ export default function Home() {
   };
 
   return (
-    // コンテナのスタイル設定
     <div className="flex place-items-center">
       <div className="pt-20 m-auto">
         <Card className="w-[350px]">
@@ -74,45 +72,43 @@ export default function Home() {
           </CardHeader>
           <CardContent>
             <Form {...form}>
-            <form id="login" onSubmit={form.handleSubmit(handleOnSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="example@mail.com" {...field} />
-                    </FormControl>
-                    <FormDescription></FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input placeholder="password" {...field} />
-                    </FormControl>
-                    <FormDescription></FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </form>
+              <form id="login" onSubmit={form.handleSubmit(handleOnSubmit)} className="space-y-8">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input placeholder="example@mail.com" {...field} />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input type="password" placeholder="password" {...field} />
+                      </FormControl>
+                      <FormDescription></FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </form>
             </Form>
           </CardContent>
           <CardFooter className="flex justify-between">
             <Button form="login" type="submit" className="hover:opacity-50">Login</Button>
           </CardFooter>
         </Card>
-        <Link href="/signup">
-          アカウント作成
-        </Link>
+        <Link href="/signup">アカウント作成</Link>
       </div>
     </div>
   );
