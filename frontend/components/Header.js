@@ -30,7 +30,7 @@ const Header = ({ postData, apps, handleSelectApp }) => {
     };
 
     return (
-        <header className="flex justify-between items-center p-4  bg-slate-200">
+        <header className="flex justify-between items-center p-4 bg-white sticky top-0 z-30 border-b-2 border-b-slate-100">
             <div className="flex items-center">
                 <Sidebar apps={apps} handleSelectApp={handleSelectApp} />
                 <h1 className="text-2xl font-bold">Dashboard</h1>
