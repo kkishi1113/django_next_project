@@ -244,7 +244,8 @@ module.exports = logger;
 ```
 
 VSCodeの拡張機能 Dev Containerをインストールする。
-検索でdevcontainer.jsonを探し、下記の通り設定する。
+devcontainer.json(コンテナの構成ファイル)をワークスペース(/django_next_project/.devcontainer/)に作成し(VSCodeの左下の「><」をクリックして「開発コンテナ構成ファイルを追加...」を選択する)、下記の通り設定する。
+うまくいかないときは、devcontainer.jsonの「"dockerComposeFile":」のパスがあっているかを確認し、それでもだめならDev Containerをアンインストールして、再度インストールする。
 ```
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose
@@ -254,8 +255,7 @@ VSCodeの拡張機能 Dev Containerをインストールする。
 	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
 	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
 	"dockerComposeFile": [
-		"../../../../../../../../../../../workspace/project001/django_next_project/docker-compose.yml",
-		"docker-compose.yml"
+		"../docker-compose.yml",
 	],
 
 	// The 'service' property is the name of the service for the container that VS Code should
