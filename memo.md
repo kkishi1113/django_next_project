@@ -216,6 +216,145 @@ module.exports = logger;
 
 ```
 
+# Python Debuggerの設定
+/backend/.vscode/launch.jsonを作成する。
+```
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python デバッガー: Django",
+            "type": "debugpy",
+            "request": "launch",
+            "args": [
+                "runserver",
+                "0.0.0.0:8888"  //デバッグ用のポート
+            ],
+            "django": true,
+            "autoStartBrowser": false,
+            "program": "${workspaceFolder}/manage.py",
+            // falseにすることで自分が書いたコード以外の箇所をデバッグできます
+            "justMyCode": false
+        }
+    ]
+}
+```
+
+VSCodeの拡張機能 Dev Containerをインストールする。
+検索でdevcontainer.jsonを探し、下記の通り設定する。
+```
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose
+{
+	"name": "Existing Docker Compose (Extend)",
+
+	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
+	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
+	"dockerComposeFile": [
+		"../../../../../../../../../../../workspace/project001/django_next_project/docker-compose.yml",
+		"docker-compose.yml"
+	],
+
+	// The 'service' property is the name of the service for the container that VS Code should
+	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+	"service": "backend",
+
+	// The optional 'workspaceFolder' property is the path VS Code should open by default when
+	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
+	"workspaceFolder": "/usr/src/app",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment the next line if you want start specific services in your Docker Compose config.
+	// "runServices": [],
+
+	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+	// "shutdownAction": "none",
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "cat /etc/os-release",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			// 拡張機能リスト(拡張機能IDを指定)
+			"extensions": [
+				"MS-CEINTL.vscode-language-pack-ja",
+				"ms-python.debugpy",
+			]
+    }
+	},
+
+	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "devcontainer"
+}
+
+```
+
+
+フロントエンドのAPI通信エンドポイントのポート番号をlaunch.jsonのデバッグ用ポートの番号に合わせるために、
+/frontend/.env.localを下記の通りに設定する。
+```
+# Mac
+# NEXT_PUBLIC_API_BASE_URL=http://0.0.0.0:8000/api
+# Windows
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000/api
+# debug
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8888/api
+```
+
+docker-compose.ymlのbackend:commandを下記の通り設定する。
+```
+backend:
+  container_name: backend_container
+  build:
+    context: ./backend
+  tty: true
+  ports:
+    - "8000:8000"
+  volumes:
+    - ./backend:/usr/src/app
+  # command: sh -c "python manage.py runserver 0.0.0.0:8000"
+  command: sh -c "python -m debugpy --listen 0.0.0.0:8080 manage.py runserver 0.0.0.0:8000"
+  depends_on:
+    - db
+```
+
+/backend/requirements.txtにdebugpyを追加し、backendコンテナを再ビルドする。
+```
+Django>=3.2,<4.0
+djangorestframework
+django-cors-headers
+django-rest-knox
+debugpy
+psycopg2-binary
+```
+コンテナを閉じる。
+```
+docker-compose down
+```
+backendコンテナを削除する。
+```
+docker-compose rm backend
+```
+backendコンテナを再ビルドする。
+```
+docker-compose build --no-cache backend
+```
+コンテナを立ち上げる
+```
+docker-compose up
+```
+VSCodeで「コンテナーで再度開く」を選択する（コンテナ内をVScodeで開く）。
+デバッガーを起動する。
+
 
 # その他メモ
 loggingブランチ作成&コミットプッシュ
@@ -226,3 +365,4 @@ windows用のブランチ作成
 dashboardブランチ作成
 postgresqlブランチコミット
 mainブランチコミット
+Python Debugger設定完了
