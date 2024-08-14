@@ -63,6 +63,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://0.0.0.0:3000",
+    "http://localhost:3000",
     "http://192.168.50.109:3000",
 ]
 # CORS_ALLOW_ALL_ORIGINS = True  # すべてのオリジンからのリクエストを許可
