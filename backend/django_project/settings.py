@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-)c!g1_q@(k1s+pv2mkzhz0gh29-tr402)7=k-gcjqm@o$)adc=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0","localhost"]
+ALLOWED_HOSTS = ["0.0.0.0","localhost","192.168.50.109"]
+# ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -52,17 +53,18 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 # CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "http://0.0.0.0:3000",
+    "http://192.168.50.109:3000",
 ]
 # CORS_ALLOW_ALL_ORIGINS = True  # すべてのオリジンからのリクエストを許可
 # CORS_ALLOW_CREDENTIALS = True
