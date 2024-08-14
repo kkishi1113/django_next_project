@@ -61,13 +61,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
     "http://0.0.0.0:3000",
     "http://192.168.50.109:3000",
 ]
 # CORS_ALLOW_ALL_ORIGINS = True  # すべてのオリジンからのリクエストを許可
-# CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'django_project.urls'
 
