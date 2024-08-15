@@ -231,7 +231,7 @@ const Shortcut = () => {
                   <img src={"https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url="+shortcut.url+"&size=128"}  className="m-auto w-12" />
                 </CardContent>
                 <CardFooter className="absolute bottom-0 w-full flex justify-center h-1/3 px-1">
-                  <p className="text-center">{shortcut.title}</p>
+                  <p className="text-center overflow-hidden whitespace-nowrap text-ellipsis">{shortcut.title}</p>
                 </CardFooter>
               </Link>
             </Card>
