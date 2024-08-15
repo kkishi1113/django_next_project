@@ -366,3 +366,5 @@ dashboardブランチ作成
 postgresqlブランチコミット
 mainブランチコミット
 Python Debugger設定完了
+devブランチ作成
+feature-frontブランチ作成（親：devブランチ）
