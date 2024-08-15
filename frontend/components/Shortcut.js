@@ -178,7 +178,7 @@ const Shortcut = () => {
         </Dialog>
         <div className="grid grid-cols-2 xl:grid-cols-8 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 gap-4 py-4">
           {shortcuts.map((shortcut)=>(
-            <HoverCard>
+            <HoverCard openDelay={0} closeDelay={0}>
               <Card key={shortcut.id} className="border-white shadow-white h-full w-full relative group">
                 <Dialog>
                   <DialogTrigger asChild className="rounded-full">
@@ -245,7 +245,7 @@ const Shortcut = () => {
                   </Link>
                 </HoverCardTrigger>
               </Card>
-              <HoverCardContent className="text-center text-sm w-auto max-w-96">
+              <HoverCardContent className="text-center text-sm w-auto max-w-96" sideOffset={-50}>
                 {shortcut.title}
               </HoverCardContent>
             </HoverCard>
