@@ -179,7 +179,7 @@ const Shortcut = () => {
         <div className="grid grid-cols-2 xl:grid-cols-8 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 gap-4 py-4">
           {shortcuts.map((shortcut)=>(
             <HoverCard openDelay={0} closeDelay={0}>
-              <Card key={shortcut.id} className="border-white shadow-white h-full w-full relative group">
+              <Card key={shortcut.id} className="border-white shadow-white relative group">
                 <Dialog>
                   <DialogTrigger asChild className="rounded-full">
                     <Button variant="ghost" className="aspect-square absolute top-0 right-0 z-20 hidden group-hover:block" onClick={() => handleEditClick(shortcut)}>
@@ -249,9 +249,62 @@ const Shortcut = () => {
                 {shortcut.title}
               </HoverCardContent>
             </HoverCard>
-            
-            
           ))}
+          <Card className="border-white shadow-white relative group flex place-items-center">
+            <CardContent className="w-full m-auto flex justify-center">
+              <Dialog>
+                <DialogTrigger asChild className="rounded-full hover:opacity-70">
+                  <Button variant="secondary">+</Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(handleAddShortcut)} className="space-y-8">
+                      <DialogHeader>
+                        <DialogTitle>ショートカット追加</DialogTitle>
+                        <DialogDescription></DialogDescription>
+                      </DialogHeader>
+                      <FormField
+                        control={form.control}
+                        name="title"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>表示名</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Google" {...field} />
+                            </FormControl>
+                            <FormDescription></FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="url"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>URL</FormLabel>
+                            <FormControl>
+                              <Input placeholder="https://www.google.com/" {...field} />
+                            </FormControl>
+                            <FormDescription></FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <DialogFooter>
+                        <DialogClose asChild>
+                          <Button type="submit" disabled={!form.formState.isValid}>追加</Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </form>
+                  </Form>
+                </DialogContent>
+              </Dialog>
+            </CardContent>
+            <CardFooter className="absolute bottom-0 w-full flex justify-center h-1/3 px-1">
+                <p className="text-center overflow-hidden whitespace-nowrap text-ellipsis">追加</p>
+            </CardFooter>
+          </Card>
         </div> 
       </>
     );

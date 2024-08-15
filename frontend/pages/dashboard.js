@@ -52,7 +52,6 @@ const Dashboard = () => {
       <Header username={username} postData={postData} apps={apps} handleSelectApp={handleSelectApp} />
       <div className="container">
         <main>
-          <h2 className="text-lg mb-4">ようこそ、<span className="font-bold">{username}</span>さん</h2>
           {mainContent.content}
         </main>
       </div>
