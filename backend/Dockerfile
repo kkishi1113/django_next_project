@@ -4,6 +4,10 @@ FROM python:3.9
 # 作業ディレクトリを設定
 WORKDIR /usr/src/app/
 
+# Pythonがpycファイルとディスクキャッシュを生成するのを防ぐ
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
 # 必要なパッケージをインストール
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
