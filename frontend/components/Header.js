@@ -30,13 +30,13 @@ const Header = ({ postData, apps, handleSelectApp, username }) => {
     };
 
     return (
-        <header className="flex justify-between items-center p-4 bg-white sticky top-0 mb-10 z-30 border-b-2 border-b-slate-100">
-            <div className="flex items-center">
+        <header className="bg-white border-b-slate-100 z-20 border-b-2 top-0 sticky flex justify-between p-4 mb-10">
+            <div className="flex items-center gap-2">
                 <Sidebar apps={apps} handleSelectApp={handleSelectApp} />
-                <h1 className="text-2xl font-bold">Dashboard</h1>
+                <h1 className="sm:text-2xl font-bold">Dashboard</h1>
             </div>
             <div className="flex items-center">
-                <h2 className="text-xl mr-4"><span className="font-bold">{username}</span>さん</h2>
+                <h2 className="sm:text-xl mr-2"><span className="font-bold">{username}</span>さん</h2>
                 <Button variant="ghost" onClick={handleLogout} >
                     <span className="block mx-1">Logout</span>
                     <FontAwesomeIcon icon={faArrowRightFromBracket} />

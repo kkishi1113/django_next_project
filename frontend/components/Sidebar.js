@@ -26,34 +26,32 @@ const Sidebar = ({ apps, handleSelectApp }) => {
   ]
 
   return (
-    <div className="grid grid-cols-2 gap-2">
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="outline">
-            <FontAwesomeIcon icon={faBars} />
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left">
-          <SheetHeader>
-            <SheetTitle>Menu</SheetTitle>
-            <SheetDescription></SheetDescription>
-          </SheetHeader>
-          <ul className="relative">
-            { menuList.map((menu, index) => (
-              <li key={index} className="relative">
-                <SheetClose asChild>
-                  <Link href="#" onClick={()=>handleSelectApp(menu)} className="block py-2 px-4 text-sm hover:bg-gray-300" >
-                    {menu.name}
-                  </Link>
-                </SheetClose>
-              </li>
-            ))}
-          </ul>
-          <SheetFooter>
-          </SheetFooter>
-        </SheetContent>
-      </Sheet>
-    </div>
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="ghost">
+          <FontAwesomeIcon icon={faBars} />
+        </Button>
+      </SheetTrigger>
+      <SheetContent side="left">
+        <SheetHeader>
+          <SheetTitle>Menu</SheetTitle>
+          <SheetDescription></SheetDescription>
+        </SheetHeader>
+        <ul className="relative">
+          { menuList.map((menu, index) => (
+            <li key={index} className="relative">
+              <SheetClose asChild>
+                <Link href="#" onClick={()=>handleSelectApp(menu)} className="block py-2 px-4 text-sm hover:bg-gray-300" >
+                  {menu.name}
+                </Link>
+              </SheetClose>
+            </li>
+          ))}
+        </ul>
+        <SheetFooter>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   );
 };
 
