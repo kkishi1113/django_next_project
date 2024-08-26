@@ -21,7 +21,7 @@ const Sidebar = ({ apps, handleSelectApp }) => {
   const menuList = [
     // { name: 'Dashboard', content: <Link href="/dashboard"><span className="block py-2 px-4 text-sm">ダッシュボード</span></Link>},
     { name: 'Profile', content: <Link href="/profile"><span className="block py-2 px-4 text-sm">プロフィール</span></Link>},
-    { name: 'Settings', content: <Link href="/settings"><span className="block py-2 px-4 text-sm">設定</span></Link>},
+    // { name: 'Settings', content: <Link href="/settings"><span className="block py-2 px-4 text-sm">設定</span></Link>},
     ...apps,
   ]
 

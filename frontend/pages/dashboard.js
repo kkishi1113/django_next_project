@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Todo from '../components/Todo';
+import Setting from '../components/Setting';
 import Shortcut from '../components/Shortcut';
 import { fetchData, postData, deleteData, patchData } from '../utils/utils';
 
 
 const apps = [
-  { name: 'Shortcut', content: <Shortcut /> },
-  { name: 'Todo', content: <Todo /> },
+  { name: 'Shortcuts', content: <Shortcut /> },
+  { name: 'Todos', content: <Todo /> },
+  { name: 'Settings', content: <Setting /> },
   // { name: 'Link', content: <Link href="/dashboard"><span className="text-2xl font-bold">Dashboard</span></Link> },
   // { name: 'Button0', content: <div><button  className="bg-green-500 text-white px-4 py-2 rounded" value="0" onClick={(e) => console.log(e.target.value)}>ボタン0</button></div>},
   // { name: 'Button1', content: <div><button className="bg-blue-500 text-white px-4 py-2 rounded" value="1" onClick={(e) => console.log(e.target.value)}>ボタン1</button></div> },

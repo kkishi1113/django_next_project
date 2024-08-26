@@ -178,8 +178,8 @@ const Shortcut = () => {
         </Dialog>
         <div className="grid grid-cols-2 xl:grid-cols-8 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 gap-4 py-4">
           {shortcuts.map((shortcut)=>(
-            <HoverCard openDelay={0} closeDelay={0}>
-              <Card key={shortcut.id} className="border-white shadow-white relative group">
+            <HoverCard key={shortcut.id} openDelay={0} closeDelay={0}>
+              <Card className="border-white shadow-white relative group">
                 <Dialog>
                   <DialogTrigger asChild className="rounded-full">
                     <Button variant="ghost" className="absolute top-0 right-0 z-10 hidden group-hover:block" onClick={() => handleEditClick(shortcut)}>
@@ -232,7 +232,7 @@ const Shortcut = () => {
                     </Form>
                   </DialogContent>
                 </Dialog>
-                <HoverCardTrigger>
+                <HoverCardTrigger asChild>
                   <Link href={shortcut.url} target="_blank" rel="noopener noreferrer" className="hover:opacity-50 block aspect-square">
                     <CardContent className="absolute inset-0 flex place-items-center ">
                       <img src={"https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url="+shortcut.url+"&size=128"}  className="m-auto w-12" />
