@@ -4,7 +4,7 @@ from django.urls import path, include
 from notes.views import TodoListCreateAPI, TodoUpdateDeleteAPI
 from shortcuts.views import ShortcutListCreateAPI, ShortcutUpdateDeleteAPI
 from knox import views as knox_views
-from accounts.views import LoginView, RegisterView, UserDetailAPI
+from accounts.views import LoginView, RegisterView, UserDetailAPI, UserSettingAPI
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/logoutall/', knox_views.LogoutAllView.as_view(), name='knox_logoutall'),
     path('api/register/', RegisterView.as_view(), name='register'),
     path('api/user/', UserDetailAPI.as_view(), name='user-detail'),
+    path('api/user/setting/', UserSettingAPI.as_view(), name='user-setting'),
     path('api/todos/', TodoListCreateAPI.as_view(), name='todo-list-create'),
     path('api/todos/<int:pk>/', TodoUpdateDeleteAPI.as_view(), name='todo-update-delete'),
     path('api/shortcuts/', ShortcutListCreateAPI.as_view(), name='shortcut-list-create'),

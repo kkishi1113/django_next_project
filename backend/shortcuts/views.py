@@ -17,9 +17,6 @@ class ShortcutListCreateAPI(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-
-
-
 class ShortcutUpdateDeleteAPI(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = ShortcutSerializer
