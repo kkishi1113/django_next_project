@@ -23,3 +23,17 @@ class CustomAuthTokenSerializer(serializers.Serializer):
             raise serializers.ValidationError('例外エラー: Must include "email" and "password".')
 
         return attrs
+
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'password', 'email')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
+        return user
+
+class UserSettingSerializer(serializers.Serializer):
+    username = serializers.CharField(min_length=5 ,max_length=30, required=False)
+    email = serializers.EmailField(required=False)

@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
-import { fetchData, patchData } from '../utils/utils';
+import { fetchData, postData } from '../utils/utils';
 
 const profileFormSchema = z.object({
     username: z
@@ -37,13 +37,7 @@ const profileFormSchema = z.object({
         .email(),
 })
 
-const defaultValues = {
-    username: "test",
-    email: "test@mail.com",
-}
-
 const Setting = () => {
-
     const router = useRouter();
 
     const handleError = (error) => {
@@ -58,28 +52,36 @@ const Setting = () => {
 
     const form = useForm({
         resolver: zodResolver(profileFormSchema),
-        defaultValues,
+        defaultValues: {
+            username: "",
+            email: "",
+        },
         mode: "onChange",
-    })
+    });
 
     const onSubmit = async (data) => {
-        console.log(data);
-        // await axios.post(process.env.NEXT_PUBLIC_API_BASE_URL+'/settings/', formData);
-        // await patchData(`/settings/${data.id}/`, { username: data.username, email: data.email });
+        try {
+            await postData(`/user/setting/`, { username: data.username, email: data.email });
+        } catch (error) {
+            handleError(error);
+        }
     }
 
     useEffect(() => {
-        console.log("useEffect実行Dashboard");
+        console.log("useEffect実行Settings");
         const fetchUserData = async () => {
             try {
                 const user = await fetchData('/user/');
-                setUsername(user.username);
+                form.reset({
+                    username: user.username,
+                    email: user.email,
+                });
             } catch (error) {
                 handleError(error);
             }
         };
         fetchUserData();
-    }, []);
+    }, [form]);
 
     return (
         <div className="space-y-6">
