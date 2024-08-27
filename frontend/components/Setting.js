@@ -1,5 +1,7 @@
 "use client"
 
+import { useEffect } from "react"
+import { useRouter } from 'next/router';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -17,6 +19,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
+import { fetchData, patchData } from '../utils/utils';
 
 const profileFormSchema = z.object({
     username: z
@@ -40,6 +43,19 @@ const defaultValues = {
 }
 
 const Setting = () => {
+
+    const router = useRouter();
+
+    const handleError = (error) => {
+        if (error.response && error.response.status === 401) {
+            alert('セッションの有効期限が切れました。再度ログインしてください。');
+            localStorage.removeItem('token');
+            router.push('/');
+        } else {
+            console.error('エラーが発生しました:', error);
+        }
+    };
+
     const form = useForm({
         resolver: zodResolver(profileFormSchema),
         defaultValues,
@@ -48,8 +64,22 @@ const Setting = () => {
 
     const onSubmit = async (data) => {
         console.log(data);
-        await axios.post(process.env.NEXT_PUBLIC_API_BASE_URL+'/register/', formData);
+        // await axios.post(process.env.NEXT_PUBLIC_API_BASE_URL+'/settings/', formData);
+        // await patchData(`/settings/${data.id}/`, { username: data.username, email: data.email });
     }
+
+    useEffect(() => {
+        console.log("useEffect実行Dashboard");
+        const fetchUserData = async () => {
+            try {
+                const user = await fetchData('/user/');
+                setUsername(user.username);
+            } catch (error) {
+                handleError(error);
+            }
+        };
+        fetchUserData();
+    }, []);
 
     return (
         <div className="space-y-6">
